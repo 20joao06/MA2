@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detalhes do produto na JVCustom - Veja especificações técnicas, stock atual e adicione ao seu carrinho.">
+  <title>JVCustom - Detalhes do Produto</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Estilos Globais -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Estilos Específicos para Detalhes -->
+  <style>
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 40px;
+    }
+    
+    .product-gallery {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--card-shadow);
+      aspect-ratio: 1.1;
+      overflow: hidden;
+    }
+    
+    .product-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      transition: var(--transition-slow);
+    }
+    
+    .product-gallery:hover img {
+      transform: scale(1.03);
+    }
+    
+    .product-meta-category {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    
+    .product-meta-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    
+    .product-meta-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 24px;
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    
+    .stars {
+      color: var(--accent-secondary);
+      display: flex;
+    }
+    
+    .product-meta-price {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    
+    .product-meta-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+    
+    /* Configuração de Stock e Compra */
+    .purchase-section {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .stock-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 24px;
+    }
+    
+    .stock-in {
+      background-color: var(--success-bg);
+      color: var(--success);
+    }
+    
+    .stock-low {
+      background-color: var(--warning-bg);
+      color: var(--warning);
+    }
+    
+    .stock-out {
+      background-color: var(--danger-bg);
+      color: var(--danger);
+    }
+    
+    .purchase-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-tertiary);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 48px;
+    }
+    
+    .qty-btn {
+      width: 44px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-secondary);
+      transition: var(--transition-fast);
+      user-select: none;
+    }
+    
+    .qty-btn:hover {
+      background-color: var(--border-color);
+      color: var(--text-primary);
+    }
+    
+    .qty-input {
+      width: 50px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      background: none;
+    }
+    
+    /* Especificações Técnicas */
+    .specs-section {
+      margin-top: 60px;
+    }
+    
+    .specs-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+    
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    
+    .specs-table tr {
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .specs-table tr:last-child {
+      border-bottom: none;
+    }
+    
+    .specs-table td {
+      padding: 16px 24px;
+      font-size: 14px;
+    }
+    
+    .specs-label {
+      font-weight: 700;
+      color: var(--text-secondary);
+      width: 30%;
+      background-color: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+    }
+    
+    .specs-value {
+      color: var(--text-primary);
+      width: 70%;
+    }
+    
+    /* Related Products */
+    .related-section {
+      margin-top: 100px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 80px;
+    }
+    
+    @media (max-width: 900px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .product-gallery {
+        aspect-ratio: 4/3;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho Global -->
+  <header id="global-header"></header>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="container" id="productContainer">
+      <!-- Será injetado dinamicamente por JS -->
+      <div style="text-align: center; padding: 100px 0;">
+        <p style="color: var(--text-secondary)">A carregar detalhes do produto...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé Global -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/product-details.js"></script>
+</body>
+</html>

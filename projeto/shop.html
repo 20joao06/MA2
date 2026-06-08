@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo completo de peças de estética automóvel na JVCustom - Filtre por escapes, ailerons, jantes, filtros de ar e adesivos.">
+  <title>JVCustom - Catálogo de Peças</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Estilos Globais -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Estilos Específicos para o Catálogo -->
+  <style>
+    .catalog-header {
+      padding: 60px 0 30px;
+      text-align: center;
+    }
+    
+    .catalog-title {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    
+    .catalog-subtitle {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+    
+    /* Barra de Pesquisa e Filtros */
+    .filter-section {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .search-wrapper {
+      flex-grow: 1;
+      min-width: 280px;
+      position: relative;
+    }
+    
+    .search-wrapper svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    
+    .search-input {
+      padding-left: 48px;
+    }
+    
+    .category-pills {
+      display: flex;
+      gap: 10px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    
+    .category-pill {
+      padding: 10px 20px;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .category-pill:hover, .category-pill.active {
+      background-color: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+      box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.2);
+    }
+    
+    .sort-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .sort-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    
+    .sort-select {
+      min-width: 180px;
+    }
+    
+    /* Configurações Extra do Perfil */
+    .profile-preference-alert {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 30px;
+      padding: 16px 24px;
+      background-color: var(--bg-tertiary);
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--accent-secondary);
+      font-size: 14px;
+    }
+    
+    .toggle-preference-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      cursor: pointer;
+    }
+    
+    .toggle-preference-wrap input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-secondary);
+    }
+    
+    @media (max-width: 1024px) {
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .category-pills {
+        justify-content: center;
+      }
+      .sort-wrapper {
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho Global -->
+  <header id="global-header"></header>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Cabeçalho do Catálogo -->
+      <div class="catalog-header">
+        <h1 class="catalog-title">Catálogo JVCustom</h1>
+        <p class="catalog-subtitle">Peças selecionadas para projetos de estética automóvel com personalidade.</p>
+      </div>
+      
+      <!-- Filtro Personalizado Baseado no Perfil do Utilizador -->
+      <div id="profileAlertContainer" style="display: none;">
+        <div class="profile-preference-alert">
+          <div>
+            <svg style="vertical-align: middle; margin-right: 8px; color: var(--accent-secondary);" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <span id="profileAlertText">Filtros personalizados baseados nas suas preferências.</span>
+          </div>
+          <label class="toggle-preference-wrap">
+            <input type="checkbox" id="onlyRecommendedCheck">
+            <span>Mostrar apenas itens recomendados para mim</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Painel de Filtros e Pesquisa -->
+      <section class="filter-section">
+        <div class="filter-bar">
+          <!-- Pesquisa de Texto -->
+          <div class="search-wrapper">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="searchInput" class="form-control search-input" placeholder="Pesquisar por nome ou descrição...">
+          </div>
+          
+          <!-- Pílulas de Categoria -->
+          <ul class="category-pills" id="categoryPillsContainer">
+            <li class="category-pill active" data-category="Todos">Todos</li>
+            <li class="category-pill" data-category="Jantes">Jantes</li>
+            <li class="category-pill" data-category="Escapes">Escapes</li>
+            <li class="category-pill" data-category="Ailerons">Ailerons</li>
+            <li class="category-pill" data-category="Filtros de Ar">Filtros de Ar</li>
+            <li class="category-pill" data-category="Adesivos">Adesivos</li>
+            <li class="category-pill" data-category="Difusores">Difusores</li>
+            <li class="category-pill" data-category="Spoilers">Spoilers</li>
+            <li class="category-pill" data-category="Body Kits">Body Kits</li>
+            <li class="category-pill" data-category="Luzes LED">Luzes LED</li>
+            <li class="category-pill" data-category="Suspensão">Suspensão</li>
+          </ul>
+          
+          <!-- Ordenação -->
+          <div class="sort-wrapper">
+            <span class="sort-label">Ordenar por:</span>
+            <select id="sortSelect" class="form-control sort-select">
+              <option value="relevance" selected>Relevância</option>
+              <option value="price-asc">Preço: Baixo a Alto</option>
+              <option value="price-desc">Preço: Alto a Baixo</option>
+              <option value="rating">Classificação (Estrelas)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Grelha de Produtos -->
+      <section>
+        <div class="product-grid" id="catalogGrid">
+          <!-- Injetado Dinamicamente por JavaScript -->
+        </div>
+      </section>
+      
+    </div>
+  </main>
+
+  <!-- Rodapé Global -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>

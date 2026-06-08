@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JVCustom - Peças de estética automóvel, escapes, jantes, ailerons, filtros de ar e adesivos para personalização.">
+  <title>JVCustom - Peças de Estética Automóvel</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Estilos Globais -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Estilos Específicos para a Home -->
+  <style>
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 140px 0 100px;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.12), transparent),
+                  radial-gradient(circle at bottom left, rgba(132, 204, 22, 0.08), transparent);
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: var(--accent-primary);
+      filter: blur(150px);
+      opacity: 0.15;
+      top: -100px;
+      right: -100px;
+      border-radius: var(--radius-full);
+      pointer-events: none;
+    }
+    
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    
+    .hero-tagline {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-primary);
+      margin-bottom: 16px;
+      display: inline-block;
+      border: 1px solid var(--border-color);
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background-color: var(--bg-secondary);
+    }
+    
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 54px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+    
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 520px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .hero-image-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+      background-color: var(--bg-secondary);
+    }
+    
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-slow);
+    }
+    
+    .hero-image-container:hover .hero-img {
+      transform: scale(1.05);
+    }
+    
+    /* Decorações Hero */
+    .hero-badge-float {
+      position: absolute;
+      background-color: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .hero-badge-1 {
+      bottom: 40px;
+      left: -20px;
+    }
+    
+    .hero-badge-2 {
+      top: 40px;
+      right: -20px;
+      animation-delay: 2s;
+    }
+    
+    .float-icon {
+      width: 40px;
+      height: 40px;
+      background-color: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-secondary);
+    }
+    
+    .float-text div:first-child {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    
+    .float-text div:last-child {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    /* Section Styles */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-bottom: 60px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .home-section {
+      padding: 100px 0;
+    }
+    
+    .home-section.dark-alt {
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    /* Categories Showcase */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    .category-card {
+      position: relative;
+      height: 240px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: flex-end;
+      padding: 32px;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(9, 13, 22, 0.95) 20%, rgba(9, 13, 22, 0.2));
+      z-index: 1;
+      transition: var(--transition-normal);
+    }
+    
+    .category-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-slow);
+    }
+    
+    .category-card:hover .category-img {
+      transform: scale(1.08);
+    }
+    
+    .category-card:hover::before {
+      background: linear-gradient(to top, rgba(9, 13, 22, 0.95) 10%, rgba(9, 13, 22, 0.4));
+    }
+    
+    .category-info {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .category-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+    
+    .category-action {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-primary-hover);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .category-card:hover .category-action {
+      gap: 10px;
+    }
+    
+    /* Personalized suggestions section placeholder card */
+    .recommendation-banner {
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    
+    .recommend-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background-color: var(--success-bg);
+      color: var(--success);
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+    }
+    
+    .recommendation-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .recommendation-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+    
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      .hero-image-container {
+        margin-top: 48px;
+      }
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+      .recommendation-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho Global -->
+  <header id="global-header"></header>
+
+  <!-- Seção Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Textos do Hero -->
+        <div class="hero-content">
+          <span class="hero-tagline">Novas coleções de estética automóvel</span>
+          <h1 class="hero-title">
+            Peças que transformam<br>o teu <span>projeto</span>
+          </h1>
+          <p class="hero-desc">
+            Explora escapes, jantes, ailerons, filtros de ar, vinis, difusores, lips e kits exteriores de marcas reconhecidas para personalizar o teu automóvel.
+          </p>
+          <div class="hero-buttons">
+            <a href="shop.html" class="btn btn-primary">Ver Catálogo</a>
+            <a href="auth.html" class="btn btn-secondary">Criar Perfil</a>
+          </div>
+        </div>
+        
+        <!-- Imagem e Badges Flutuantes -->
+        <div class="hero-image-container">
+          <div class="hero-image-wrapper">
+            <img src="assets/img/hero-garage.png" alt="Carro Personalizado" class="hero-img">
+          </div>
+          
+          <!-- Badge Flutuante 1 -->
+          <div class="hero-badge-float hero-badge-1">
+            <div class="float-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.886H3.82l4.897 3.56L6.805 18.33 12 14.77l5.195 3.56-1.912-5.886 4.897-3.56h-6.268Z"/></svg>
+            </div>
+            <div class="float-text">
+              <div>Líder de Vendas</div>
+              <div>Escape Titanium</div>
+            </div>
+          </div>
+          
+          <!-- Badge Flutuante 2 -->
+          <div class="hero-badge-float hero-badge-2">
+            <div class="float-icon" style="color: var(--accent-primary);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="float-text">
+              <div>Envio Grátis</div>
+              <div>Encomendas > 150€</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorias -->
+  <section class="home-section dark-alt">
+    <div class="container">
+      <h2 class="section-title">Navegar por Coleção</h2>
+      <p class="section-subtitle">Descobre peças pensadas para transformar o visual e a presença do teu carro.</p>
+      
+      <div class="categories-grid">
+        <!-- Jantes -->
+        <a href="shop.html?category=Jantes" class="category-card">
+          <img src="assets/img/jantes-forged.png" alt="Jantes Desportivas" class="category-img">
+          <div class="category-info">
+            <div class="category-name">Jantes Desportivas</div>
+            <div class="category-action">
+              Explorar
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Escapes -->
+        <a href="shop.html?category=Escapes" class="category-card">
+          <img src="assets/img/escape-titanium.png" alt="Escapes Performance" class="category-img">
+          <div class="category-info">
+            <div class="category-name">Escapes Performance</div>
+            <div class="category-action">
+              Explorar
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Ailerons -->
+        <a href="shop.html?category=Ailerons" class="category-card">
+          <img src="assets/img/aileron-carbono.png" alt="Ailerons e Exterior" class="category-img">
+          <div class="category-info">
+            <div class="category-name">Ailerons e Exterior</div>
+            <div class="category-action">
+              Explorar
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recomendações Personalizadas -->
+  <section class="home-section" id="recommendations-section">
+    <div class="container">
+      <h2 class="section-title">Recomendados para Si</h2>
+      <p class="section-subtitle" id="recommendations-description">Carregando sugestões personalizadas com base no seu perfil...</p>
+      
+      <!-- Banner Dinâmico -->
+      <div id="recommendationBanner" class="recommendation-banner" style="display: none;">
+        <!-- Injetado por JS -->
+      </div>
+      
+      <!-- Grelha de Produtos Recomendados -->
+      <div class="product-grid" id="recommendedProductsGrid">
+        <!-- Injetado por JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Mais Populares -->
+  <section class="home-section dark-alt">
+    <div class="container">
+      <h2 class="section-title">Destaques da Semana</h2>
+      <p class="section-subtitle">Catálogo alargado com várias marcas, gamas de preço e soluções para projetos discretos ou agressivos.</p>
+      
+      <div class="product-grid" id="featuredProductsGrid">
+        <!-- Injetado por JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé Global -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Script específico da Home Page para carregar os produtos
+    document.addEventListener('DOMContentLoaded', () => {
+      renderHomepageProducts();
+      
+      // Escutar se o perfil do utilizador mudou para re-renderizar
+      window.addEventListener('cartUpdated', renderHomepageProducts);
+    });
+
+    function renderHomepageProducts() {
+      if (!window.db) return;
+      
+      const session = window.db.getSession();
+      const products = window.db.getProducts();
+      
+      // 1. Renderizar Recomendados
+      const recTitleDesc = document.getElementById('recommendations-description');
+      const recBanner = document.getElementById('recommendationBanner');
+      const recGrid = document.getElementById('recommendedProductsGrid');
+      
+      if (session) {
+        // Utilizador tem sessão iniciada -> Recomendações Personalizadas
+        recTitleDesc.innerHTML = `Olá <strong>${session.name}</strong>, de acordo com o seu perfil <strong>${session.preference}</strong> e orçamento <strong>${session.budget}</strong>:`;
+        
+        // Regras de recomendação:
+        // - Orçamento 'Low' (Baixo): Recomenda produtos até 100€
+        // - Orçamento 'Medium' (Moderado): Recomenda produtos até 300€
+        // - Orçamento 'High' (Premium): Recomenda produtos acima de 200€ (luxo)
+        // Se a preferência for 'Exigente', dar prioridade a produtos de maior valor e maior rating.
+        let filteredRecs = [];
+        let bannerText = '';
+        
+        if (session.budget === 'Low') {
+          filteredRecs = products.filter(p => p.price <= 100);
+          bannerText = `Está com perfil <strong>Económico</strong>. Sugerimos filtros de ar, adesivos e pequenos detalhes exteriores para começar a personalização sem gastar demasiado.`;
+        } else if (session.budget === 'Medium') {
+          filteredRecs = products.filter(p => p.price > 40 && p.price <= 300);
+          bannerText = `Está com perfil <strong>Prático/Moderado</strong>. Selecionámos jantes, ailerons e difusores com bom equilíbrio entre preço, impacto visual e qualidade.`;
+        } else { // High
+          filteredRecs = products.filter(p => p.price >= 200);
+          bannerText = `Está com perfil <strong>Premium/Exigente</strong>. Destacamos escapes, jantes premium e peças de carbono, evitando sugestões de baixo impacto visual.`;
+        }
+        
+        // Exibir banner
+        recBanner.style.display = 'flex';
+        recBanner.innerHTML = `
+          <div>
+            <span class="recommend-badge">Sugerido para o seu Perfil</span>
+            <h3 class="recommendation-title">Coleção Selecionada Especialmente</h3>
+            <p class="recommendation-desc">${bannerText}</p>
+          </div>
+          <a href="profile.html" class="btn btn-secondary btn-sm" style="flex-shrink: 0;">Ajustar Preferências</a>
+        `;
+        
+        // Mostrar produtos correspondentes
+        renderGrid(recGrid, filteredRecs.slice(0, 3), true);
+      } else {
+        // Utilizador sem sessão -> Sugestões padrão + Banner para iniciar sessão
+        recTitleDesc.innerText = 'Inicie sessão para obter recomendações ajustadas ao seu estilo de personalização e orçamento.';
+        
+        recBanner.style.display = 'flex';
+        recBanner.innerHTML = `
+          <div>
+            <span class="recommend-badge" style="background-color: var(--border-color); color: var(--text-secondary);">Descobre a JVCustom</span>
+            <h3 class="recommendation-title">Recomendações Inteligentes</h3>
+            <p class="recommendation-desc">Crie um perfil para que possamos sugerir produtos ideais com base no seu orçamento mensal e nível de exigência de hardware.</p>
+          </div>
+          <a href="auth.html" class="btn btn-primary btn-sm" style="flex-shrink: 0;">Iniciar Sessão</a>
+        `;
+        
+        // Mostrar sugestões populares por defeito
+        const defaultRecs = products.filter(p => p.rating >= 4.7);
+        renderGrid(recGrid, defaultRecs.slice(0, 3), false);
+      }
+      
+      // 2. Renderizar Destaques da Semana (Mais Populares por Rating)
+      const featuredGrid = document.getElementById('featuredProductsGrid');
+      const sortedByRating = [...products].sort((a, b) => b.rating - a.rating);
+      renderGrid(featuredGrid, sortedByRating.slice(0, 3), false);
+    }
+    
+    // Função utilitária para renderizar uma grelha de produtos
+    function renderGrid(container, items, showBadge) {
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
+            Nenhum produto correspondente disponível de momento.
+          </div>
+        `;
+        return;
+      }
+      
+      container.innerHTML = items.map(p => {
+        let badgeHtml = '';
+        if (showBadge) {
+          badgeHtml = `<span class="product-card-badge badge-recommend">Para Si</span>`;
+        } else if (p.stock <= 3 && p.stock > 0) {
+          badgeHtml = `<span class="product-card-badge badge-low-stock">Últimas Unidades</span>`;
+        } else if (p.stock === 0) {
+          badgeHtml = `<span class="product-card-badge badge-low-stock" style="background-color: var(--text-muted)">Esgotado</span>`;
+        }
+        
+        return `
+          <div class="product-card">
+            ${badgeHtml}
+            <div class="product-card-image-wrapper">
+              <a href="product-details.html?id=${p.id}">
+                <img src="${p.image}" alt="${p.name}" class="product-card-image">
+              </a>
+            </div>
+            <div class="product-card-info">
+              <span class="product-card-category">${p.category}</span>
+              <a href="product-details.html?id=${p.id}">
+                <h3 class="product-card-title">${p.name}</h3>
+              </a>
+              <p class="product-card-description">${p.description}</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">${p.price.toFixed(2)} €</span>
+                ${p.stock > 0 ? `
+                  <button class="btn btn-primary btn-sm btn-icon-only" onclick="quickAdd('${p.id}')" aria-label="Adicionar ${p.name} ao carrinho">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/><line x1="12" x2="12" y1="9" y2="15"/><line x1="9" x2="15" y1="12" y2="12"/></svg>
+                  </button>
+                ` : `
+                  <span style="font-size: 13px; font-weight: 700; color: var(--text-muted)">Sem Stock</span>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    // Função para adição rápida ao carrinho
+    function quickAdd(productId) {
+      if (window.db) {
+        const result = window.db.addToCart(productId, 1);
+        if (result.success) {
+          window.showToast('Carrinho Atualizado', result.message, 'success');
+        } else {
+          window.showToast('Erro de Stock', result.message, 'warning');
+        }
+      }
+    }
+  </script>
+</body>
+</html>

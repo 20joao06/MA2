@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reveja as suas compras, aplique cupões e efetue a compra simbólica na JVCustom.">
+  <title>JVCustom - Carrinho de Compras</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Estilos Globais -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Estilos Específicos para o Carrinho -->
+  <style>
+    .cart-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+      align-items: start;
+    }
+    
+    .cart-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .cart-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .cart-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .cart-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .cart-item-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+    
+    .cart-item-details {
+      flex-grow: 1;
+    }
+    
+    .cart-item-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .cart-item-category {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    
+    .cart-item-price-unit {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .cart-item-total {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      min-width: 90px;
+      text-align: right;
+    }
+    
+    .cart-item-remove {
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .cart-item-remove:hover {
+      color: var(--danger);
+    }
+    
+    /* Card de Resumo (Sidebar) */
+    .summary-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    
+    .summary-row.total {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-primary);
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .shipping-options {
+      margin-top: 24px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .shipping-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    
+    .shipping-option input {
+      accent-color: var(--accent-primary);
+    }
+    
+    .promo-wrapper {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    
+    .promo-wrapper .form-control {
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+    
+    .promo-wrapper .btn {
+      padding: 0 16px;
+      font-size: 13px;
+    }
+    
+    .promo-applied-tag {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      background-color: var(--success-bg);
+      color: var(--success);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: -12px;
+      margin-bottom: 20px;
+    }
+    
+    .empty-cart-state {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    
+    .empty-cart-state svg {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    
+    .empty-cart-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .empty-cart-desc {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-size: 15px;
+    }
+    
+    /* Layout Sucesso Modal */
+    .success-modal-body {
+      text-align: center;
+    }
+    
+    .success-icon-wrap {
+      width: 72px;
+      height: 72px;
+      background-color: var(--success-bg);
+      color: var(--success);
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 24px;
+      animation: checkPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    @keyframes checkPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .success-modal-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    
+    .success-modal-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    
+    .success-receipt {
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: left;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+    
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+    
+    .receipt-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .receipt-row.total {
+      font-weight: 700;
+      color: var(--text-primary);
+      border-top: 1px solid var(--border-color);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    
+    @media (max-width: 900px) {
+      .cart-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho Global -->
+  <header id="global-header"></header>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Grelha do Carrinho -->
+      <div id="cartViewContainer">
+        <!-- Renderizado dinamicamente por js/cart.js -->
+        <div style="text-align: center; padding: 100px 0;">
+          <p style="color: var(--text-secondary)">A carregar carrinho...</p>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- MODAL DE SUCESSO DO CHECKOUT -->
+  <div class="modal" id="checkoutSuccessModal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-body" style="padding: 40px 32px 32px;">
+        <div class="success-modal-body">
+          <div class="success-icon-wrap">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <h2 class="success-modal-title">Compra Simbólica Confirmada!</h2>
+          <p class="success-modal-desc">Obrigado por comprar na JVCustom. O stock das peças foi atualizado localmente.</p>
+          
+          <!-- Recibo Fatura Fictícia -->
+          <div class="success-receipt" id="receiptDetails">
+            <!-- Injetado por JS -->
+          </div>
+          
+          <!-- Botões Finais -->
+          <div style="display: flex; gap: 16px; justify-content: center;">
+            <a href="shop.html" class="btn btn-secondary btn-sm" onclick="closeModal()">Continuar a Comprar</a>
+            <a href="profile.html" class="btn btn-primary btn-sm" onclick="closeModal()">Ver Encomendas</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé Global -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
